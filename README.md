@@ -45,3 +45,50 @@ python -m venv venv
 
 # Upgrade pip (optional but recommended)
 python -m pip install --upgrade pip setuptools wheel
+```
+---
+
+## 2. Install Dependencies
+   Run the following command to install the required libraries:
+```pip install opencv-python mediapipe numpy```
+💻 Usage
+Make sure your webcam is connected.
+Run the main script:
+```python main.py```
+
+---
+
+## 3.Controls:
+
+The window titled "Driver Monitoring System" will appear.
+Press `q` on your keyboard to quit the program.
+
+---
+
+## 🧠 How It Works
+1. Face Mesh: The system uses MediaPipe to map 468 facial landmarks.
+2. EAR (Eye Aspect Ratio): We extract 6 coordinates for each eye. The ratio of vertical distance to horizontal distance determines if the eye is open or closed.
+3. MAR (Mouth Aspect Ratio): We extract top/bottom and left/right lip coordinates. A high vertical ratio indicates a yawn.
+4. Logic:
+~ If `MAR > Threshold` → Yawn Alert
+~ If `EAR < Threshold` for `X` frames → Drowsiness Alert
+
+---
+
+## 🔧 Troubleshooting
+
+* "ModuleNotFoundError": Ensure you activated your virtual environment (`.\venv\Scripts\Activate.ps1`) before running the script.
+* Webcam not opening: Change the index in the code `cv2.VideoCapture(0)` to `1 `or `2` if you have multiple cameras.
+* Audio not playing: This project uses` winsound` (Windows only). If you are on Mac/Linux, replace the `sound_alarm` function with a cross-platform library like` playsound`.
+
+---
+
+## 🔮 Future Scope
+
+* Data Logging: Save a CSV file with timestamps of every alert for driver analysis.
+* Mobile App: Convert the model to TFLite for use on Android/iOS.
+* Head Pose Estimation: Add detection for when the driver looks away from the road (distraction).
+---
+
+## 📄 License
+This project is open-source and available under the MIT License.
